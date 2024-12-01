@@ -95,8 +95,10 @@ phone-catalog/
 
 ## Contributors
 
-- **[Your Name]** - Developer
-- **[Collaborator Name]** - Designer
+- **[Mehul Srivastava]**
+- **[Sid]**
+- **[Neel]**
+- **[Anand]**
 
 ---
 
