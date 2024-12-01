@@ -1,0 +1,44 @@
+/* General Styles */
+.full-height {
+    height: 100vh;
+    background: linear-gradient(to right, #ece9e6, #ffffff);
+    color: #333;
+  }
+  
+  /* Card Styles */
+  .phone-details-card {
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #ffffff; /* Light background */
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .details-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Grid for Specifications */
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 15px;
+  }
+  
+  .details-grid p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+  }
+  
