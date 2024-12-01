@@ -95,11 +95,9 @@ phone-catalog/
 
 ## Contributors
 
-- **[Mehul Srivastava]**
-- **[Sid]**
-- **[Neel]**
-- **[Anand]**
+- **Mehul Srivastava**
+- **Sid**
+- **Neel**
+- **Anand**
 
 ---
-
-Feel free to contribute or report issues! 🚀
