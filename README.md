@@ -69,6 +69,7 @@ npm start
 
 - `GET /phones`: Fetch all phone models.
 - `GET /specifications/:id`: Fetch detailed specifications for a phone.
+- `GET /add-phone`: Add a new phone model and its details to the database.
 
 ---
 
