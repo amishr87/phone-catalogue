@@ -96,7 +96,7 @@ phone-catalog/
 ## Contributors
 
 - **Mehul Srivastava**
-- **Sid**
+- **Siddhant**
 - **Neel**
 - **Anand**
 
