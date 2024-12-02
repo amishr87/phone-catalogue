@@ -61,6 +61,7 @@ npm install
 ### 4. Import the database
 
 1. After creating your `.env` file, create a database phone_catalog: `create database phone_catalog` by logging into your psql user.
+   
 2. Run `psql -U username -d phone_catalog -f output_file.sql` and replace username with your psql username. Make sure you run this command in the root repository folder. That is where `output_file.sql` is stored.
 
 ### 5. Start the Frontend
@@ -102,8 +103,8 @@ phone-catalog/
 ## Contributors
 
 - **Mehul Srivastava**
-- **Siddhant**
-- **Neel**
+- **Siddhant Jain**
+- **Neel Madhav Dogra**
 - **Anand**
 
 ---
