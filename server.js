@@ -33,6 +33,19 @@ const startServer = async () => {
       }
     });
 
+    app.get("/phones/:id", async (req, res) => {
+      try {
+        const { id } = req.params;
+        const result = await db.query("SELECT * FROM phone WHERE modelid = $1",
+          [id]
+        );
+        res.json(result.rows);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      }
+    });
+
     app.get("/specifications/:id", async (req, res) => {
       try {
         const { id } = req.params;

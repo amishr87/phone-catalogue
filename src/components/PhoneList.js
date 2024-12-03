@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
-import { Card, Container, Row, Col, Spinner, Button } from "react-bootstrap";
+import { Card, Container, Spinner, Button } from "react-bootstrap";
 import "./PhoneList.css"; // Custom CSS file
 
 function PhoneList() {
@@ -30,44 +30,34 @@ function PhoneList() {
   return (
     <Container className="my-5">
       <h1 className="text-center mb-4 title">📱 Phone Catalog</h1>
-      <Row className="justify-content-center">
+      <div className="two-column-grid"> {/* Use custom CSS class */}
         {phones.map((phone) => (
-          <Col
-            key={phone.modelid}
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            className="mb-4"
-          >
-            <Card className="phone-card shadow">
-              <div className="card-header">
-                <Card.Img
-                  variant="top"
-                  src={phone.image}
-                  alt={phone.modelname}
-                  className="card-img"
-                />
-              </div>
-              <Card.Body>
-                <Card.Title className="card-title">
-                  {phone.modelname}
-                </Card.Title>
-                <Card.Text className="card-text">
-                  <strong>Year:</strong> {phone.year}
-                  <br />
-                  <strong>Price:</strong> ${phone.startingprice}
-                </Card.Text>
-                <Link to={`/phones/${phone.modelid}`}>
-                  <Button variant="info" className="btn-block text-white">
-                    View Details
-                  </Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
+          <Card key={phone.modelid} className="phone-card shadow">
+            <div className="card-header">
+              <Card.Img
+                variant="top"
+                src={`/${phone.image}`}
+                className="card-img"
+              />
+            </div>
+            <Card.Body>
+              <Card.Title className="card-title">
+                {phone.modelname}
+              </Card.Title>
+              <Card.Text className="card-text">
+                <strong>Year:</strong> {phone.year}
+                <br />
+                <strong>Price:</strong> ${phone.startingprice}
+              </Card.Text>
+              <Link to={`/phones/${phone.modelid}`}>
+                <Button variant="info" className="btn-block text-white">
+                  View Details
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
         ))}
-      </Row>
+      </div>
     </Container>
   );
 }

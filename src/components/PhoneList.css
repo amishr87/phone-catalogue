@@ -1,69 +1,98 @@
 /* General Styles */
 .full-height {
-    height: 100vh;
-    background: linear-gradient(to right, #f9f9f9, #e0e0e0);
-    color: #333;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #007bff;
-    text-shadow: 1px 1px 2px #aaa;
-  }
-  
-  /* Card Styles */
-  .phone-card {
-    border-radius: 15px;
-    overflow: hidden;
-    background-color: #ffffff; /* Light background color for each card */
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .phone-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card-header {
-    background-color: #f4f4f4; /* Subtle header background */
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .card-img {
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  .card-text {
-    font-size: 0.95rem;
-    color: #666;
-    text-align: center;
-  }
-  
-  /* Button Styles */
-  .btn-block {
-    width: 100%;
-    background-color: #007bff;
-    border: none;
-    transition: background-color 0.3s;
-  }
-  
-  .btn-block:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsive Centering */
-  .phone-card {
-    max-width: 280px; /* Ensure cards aren't too wide */
-    margin: 0 auto; /* Center cards horizontally */
-  }
-  
+  height: 100vh;
+  background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+  color: #333;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+  text-shadow: 1px 1px 2px #aaa;
+}
+
+.phone-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.phone-card {
+  width: 500px; /* Set a fixed width for the card */
+  height: 400px; /* Set a fixed height for the card */
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #ffffff; /* Light background color for each card */
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  gap: 30px; /* Optional: Add controlled spacing between elements */
+  align-items: center; /* Center content horizontally */
+}
+
+.card-header {
+  width: 100%; /* Match the card's width */
+  height: 100%; /* Fixed height for the image container */
+  overflow: hidden; /* Hide any overflow from images */
+  background-color: transparent; /* Ensure no visible background */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+  position: relative; /* Ensure proper image alignment */
+}
+
+.card-img {
+  position: absolute; /* Position the image inside the header */
+  top: 0; /* Align image to the top */
+  left: 0; /* Align image to the left */
+  width: 100%; /* Stretch the image to fully cover the header width */
+  height: 100%; /* Stretch the image to fully cover the header height */
+  object-fit: cover; /* Crop and center the image */
+  margin: 0;
+}
+
+.card-title {
+  font-size: 1.75rem; /* Large font size for prominence */
+  font-weight: 700; /* Bold font for emphasis */
+  color: #333; /* Neutral dark color for readability */
+  text-align: center;
+  text-transform: capitalize; /* Capitalize the first letter of each word */
+  margin: 10px 0; /* Add slight spacing above and below */
+}
+
+.card-text {
+  font-size: 1rem; /* Slightly larger font for readability */
+  font-weight: 400; /* Normal weight for body text */
+  color: #666; /* Subtle color for secondary information */
+  text-align: center;
+  padding: 10px 15px; /* Balanced padding for better layout */
+  line-height: 1.5; /* Improve readability with increased line height */
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 10px; /* Slightly rounded edges for a modern look */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Button Styles */
+.btn-block {
+  width: 100%;
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-block:hover {
+  background-color: #0056b3;
+}
+
+/* Grid Layout */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  justify-content: center;
+  padding: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+

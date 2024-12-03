@@ -9,14 +9,30 @@ function PhoneDetails() {
   const [phone, setPhone] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    api.get(`/specifications/${id}`) // Fetch specifications for the selected phone
-      .then((response) => {
-        setPhone(response.data[0]); // Assume the API returns an array of specifications
-        setLoading(false);
-      })
-      .catch((error) => console.error('Error fetching phone details:', error));
-  }, [id]);
+useEffect(() => {
+  const fetchPhoneDetails = async () => {
+    try {
+      const [specifications, generalDetails] = await Promise.all([
+        api.get(`/specifications/${id}`),
+        api.get(`/phones/${id}`), // Fetch phone details (including image URL)
+      ]);
+      // Extract the first objects from the response arrays
+      const specificationsData = specifications.data[0];
+      const generalDetailsData = generalDetails.data[0];
+
+      // Merge the data into the phone object
+      setPhone({
+        ...specificationsData,
+        ...generalDetailsData, // Merge general details, including image
+      });
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching phone details:', error);
+    }
+  };
+
+  fetchPhoneDetails();
+}, [id]);
 
   if (loading) {
     return (
@@ -44,34 +60,28 @@ function PhoneDetails() {
         <Card.Body>
           <div className="text-center mb-4">
             <img
-              src={phone.image}
-              alt={phone.modelname}
-              className="details-img"
+                src={`/${phone.image}`}
+                className="details-img"
             />
           </div>
           <div className="details-grid">
-            <p>
-              <strong>Screen Size:</strong> {phone.screensize} inches
-            </p>
-            <p>
-              <strong>Battery Size:</strong> {phone.batterysize} mAh
-            </p>
-            <p>
-              <strong>Processor:</strong> {phone.processor}
-            </p>
-            <p>
-              <strong>RAM:</strong> {phone.ram} GB
-            </p>
-            <p>
-              <strong>Storage:</strong> {phone.storage} GB
-            </p>
-            <p>
-              <strong>Number of Cameras:</strong> {phone.noofcameras}
-            </p>
-            <p>
-              <strong>Camera Size:</strong> {phone.camerasize} MP
-            </p>
+          <div>
+            <p><strong>Screen Size:</strong> {phone.screensize} inches</p>
+            <p><strong>Battery Size:</strong> {phone.batterysize} mAh</p>
           </div>
+          <div>
+            <p><strong>Processor:</strong> {phone.processor}</p>
+            <p><strong>RAM:</strong> {phone.ram} GB</p>
+          </div>
+          <div>
+            <p><strong>Storage:</strong> {phone.storage} GB</p>
+            <p><strong>Number of Cameras:</strong> {phone.noofcameras}</p>
+          </div>
+          <div>
+            <p><strong>Camera Size:</strong> {phone.camerasize} MP</p>
+          </div>
+        </div>
+
         </Card.Body>
       </Card>
     </Container>
