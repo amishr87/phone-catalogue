@@ -79,7 +79,7 @@ const linkStyle = {
 };
 
 const handleMouseEnter = (e) => {
-  e.target.style.color = "#ffcc00"; // Change color on hover
+  e.target.style.color = "#add8e6"; // Change color on hover
 };
 
 const handleMouseLeave = (e) => {
