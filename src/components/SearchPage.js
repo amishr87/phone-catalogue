@@ -4,11 +4,15 @@ import Search from "./Search";
 
 const SearchPage = () => {
   const [phoneName, setPhoneName] = useState("");
-  const [submittedPhone, setSubmittedPhone] = useState(null);
+  const [submittedPhone, setSubmittedPhone] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmittedPhone(phoneName);
+    if (phoneName.trim() === "") {
+      alert("Please enter a valid phone name.");
+      return;
+    }
+    setSubmittedPhone(phoneName.trim());
   };
 
   return (
@@ -26,7 +30,7 @@ const SearchPage = () => {
           </button>
         </form>
       </div>
-      {submittedPhone && <Search id={submittedPhone} />}{" "}
+      {submittedPhone && <Search modelName={submittedPhone} />}
     </>
   );
 };

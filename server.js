@@ -95,6 +95,61 @@ const startServer = async () => {
       }
     });
 
+    app.get("/search-specifications", async (req, res) => {
+      try {
+        const { modelname } = req.query;
+    
+        // Debugging: Log the incoming modelname
+        console.log("Received request for modelname:", modelname);
+    
+        // Validate input: Check if it's a non-empty string (not an ID or empty input)
+        if (!modelname || modelname.trim() === "" || !isNaN(modelname)) {
+          console.warn("Invalid or empty modelname provided");
+          return res.status(400).json({ error: "Invalid or empty modelname" });
+        }
+    
+        // Fetch the phone ID from the phone table
+        const phoneResult = await db.query(
+          "SELECT modelid FROM phone WHERE modelname = $1",
+          [modelname.trim()]
+        );
+    
+        if (phoneResult.rows.length === 0) {
+          console.warn("Phone not found for modelname:", modelname);
+          return res.status(404).json({ error: "Phone not found" });
+        }
+    
+        const phoneId = phoneResult.rows[0].modelid;
+    
+        // Fetch specifications using the phone ID
+        const specResult = await db.query(
+          "SELECT * FROM specifications WHERE modelid = $1",
+          [phoneId]
+        );
+    
+        if (specResult.rows.length === 0) {
+          console.warn(
+            `Specifications not found for phone ID ${phoneId}, modelname: ${modelname}`
+          );
+          return res.status(404).json({ error: "Specifications not found" });
+        }
+    
+        // Success response
+        console.log(
+          `Returning specifications for phone ID ${phoneId}, modelname: ${modelname}`
+        );
+        res.json({
+          phoneId,
+          specifications: specResult.rows,
+        });
+      } catch (err) {
+        // Debugging: Log the error message
+        console.error("Error fetching specifications:", err.message);
+        res.status(500).send("Server Error");
+      }
+    });
+      
+    
     const PORT = process.env.PORT || 5001;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

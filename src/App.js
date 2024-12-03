@@ -4,7 +4,7 @@ import PhoneList from "./components/PhoneList";
 import AddPhone from "./components/AddPhone";
 import PhoneDetails from "./components/PhoneDetails";
 import Search from "./components/Search";
-import SeacrhPage from "./components/SeacrhPage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
         <Route path="/" element={<PhoneList />} />
         <Route path="/add-phone" element={<AddPhone />} />
         <Route path="/phones/:id" element={<PhoneDetails />} />
-        <Route path="/search" element={<SeacrhPage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/search/:id" element={<Search />} />
       </Routes>
     </div>

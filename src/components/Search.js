@@ -3,34 +3,76 @@ import api from "../services/api";
 import { Container, Card, Spinner } from "react-bootstrap";
 import "./PhoneDetails.css";
 
-function Search(props) {
-  // Get the id prop directly
-  const { id } = props;
-  const [phone, setPhone] = useState(null);
+function Search({ modelName }) {
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch phone details using the id prop
+    let isMounted = true; // Handle component unmounts safely
 
-    api
-      .get(`/specifications/${id}`) // Fetch specifications for the selected phone
-      .then((response) => {
-        setPhone(response.data[0]); // Assume the API returns an array of specifications
-        setLoading(false);
-      })
-      .catch((error) => console.error("Error fetching phone details:", error));
-  }, [id]);
+    if (modelName) {
+      setLoading(true);
+      setError(null); // Reset error state
+      setResult(null); // Reset result state
+
+      const apiUrl = `/search-specifications?modelname=${encodeURIComponent(
+        modelName
+      )}`;
+
+      // Set a timeout for fallback
+      const timeout = setTimeout(() => {
+        if (isMounted && loading) {
+          setError("Request timed out. Please try again.");
+          setLoading(false);
+        }
+      }, 10000); // 10 seconds
+
+      api
+        .get(apiUrl)
+        .then((response) => {
+          if (isMounted) {
+            clearTimeout(timeout); // Clear timeout on success
+            setResult(response.data);
+            setLoading(false);
+          }
+        })
+        .catch((err) => {
+          if (isMounted) {
+            clearTimeout(timeout); // Clear timeout on error
+            setError(err.response?.data?.error || "An error occurred");
+            setLoading(false);
+          }
+        });
+
+      return () => {
+        isMounted = false;
+        clearTimeout(timeout); // Clear timeout on unmount
+      };
+    } else {
+      setError("Please provide a valid phone name.");
+      setLoading(false);
+    }
+  }, [modelName]);
 
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center full-height">
         <Spinner animation="border" variant="primary" />
-        <span className="ms-3"></span>
+        <span className="ms-3">Loading...</span>
       </div>
     );
   }
 
-  if (!phone) {
+  if (error) {
+    return (
+      <Container className="my-5">
+        <h1 className="text-center">{error}</h1>
+      </Container>
+    );
+  }
+
+  if (!result || !result.specifications || result.specifications.length === 0) {
     return (
       <Container className="my-5">
         <h1 className="text-center">No details found for this phone.</h1>
@@ -38,19 +80,17 @@ function Search(props) {
     );
   }
 
+  const phone = result.specifications[0];
+
   return (
     <Container className="my-5">
       <Card className="phone-details-card shadow">
         <Card.Header className="text-center card-header">
-          <h1>{phone.modelname}</h1>
+          <h1>{modelName}</h1>
         </Card.Header>
         <Card.Body>
           <div className="text-center mb-4">
-            <img
-              src={phone.image}
-              alt={phone.modelname}
-              className="details-img"
-            />
+            <img src={phone.image} alt={modelName} className="details-img" />
           </div>
           <div className="details-grid">
             <p>
