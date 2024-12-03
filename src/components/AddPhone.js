@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import './AddPhone.css';
-import api from '../services/api';
+import React, { useState } from "react";
+import "./AddPhone.css";
+import api from "../services/api";
 
 function AddPhone() {
   const [formData, setFormData] = useState({
     // Phone data
-    modelName: '',
-    year: '',
-    startingPrice: '',
-    image: '',
-    screenSize: '',
-    batterySize: '',
-    processor: '',
-    ram: '',
-    storage: '',
-    noOfCameras: '',
-    cameraSize: ''
+    modelName: "",
+    year: "",
+    startingPrice: "",
+    image: "",
+    screenSize: "",
+    batterySize: "",
+    processor: "",
+    ram: "",
+    storage: "",
+    noOfCameras: "",
+    cameraSize: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -34,11 +34,11 @@ function AddPhone() {
         modelName: formData.modelName,
         year: parseInt(formData.year),
         startingPrice: parseFloat(formData.startingPrice),
-        image: formData.image
+        image: formData.image,
       };
 
-      const phoneResponse = await api.post('/phones', phoneData);
-      const modelId = phoneResponse.data.modelid; 
+      const phoneResponse = await api.post("/phones", phoneData);
+      const modelId = phoneResponse.data.modelid;
 
       const specData = {
         modelId: modelId,
@@ -48,28 +48,28 @@ function AddPhone() {
         ram: parseInt(formData.ram),
         storage: parseInt(formData.storage),
         noOfCameras: parseInt(formData.noOfCameras),
-        cameraSize: parseFloat(formData.cameraSize)
+        cameraSize: parseFloat(formData.cameraSize),
       };
 
-      await api.post('/specifications', specData);
-      
-      alert('Phone and specifications added successfully!');
+      await api.post("/specifications", specData);
+
+      alert("Phone and specifications added successfully!");
       setFormData({
-        modelName: '',
-        year: '',
-        startingPrice: '',
-        image: '',
-        screenSize: '',
-        batterySize: '',
-        processor: '',
-        ram: '',
-        storage: '',
-        noOfCameras: '',
-        cameraSize: ''
+        modelName: "",
+        year: "",
+        startingPrice: "",
+        image: "",
+        screenSize: "",
+        batterySize: "",
+        processor: "",
+        ram: "",
+        storage: "",
+        noOfCameras: "",
+        cameraSize: "",
       });
     } catch (error) {
-      console.error('Error adding phone and specifications:', error);
-      alert('Failed to add phone and specifications. Please try again.');
+      console.error("Error adding phone and specifications:", error);
+      alert("Failed to add phone and specifications. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -216,7 +216,7 @@ function AddPhone() {
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Adding...' : 'Add Phone'}
+          {loading ? "Adding..." : "Add Phone"}
         </button>
       </form>
     </div>

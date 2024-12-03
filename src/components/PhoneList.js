@@ -30,7 +30,9 @@ function PhoneList() {
   return (
     <Container className="my-5">
       <h1 className="text-center mb-4 title">📱 Phone Catalog</h1>
-      <div className="two-column-grid"> {/* Use custom CSS class */}
+      <div className="two-column-grid">
+        {" "}
+        {/* Use custom CSS class */}
         {phones.map((phone) => (
           <Card key={phone.modelid} className="phone-card shadow">
             <div className="card-header">
@@ -41,9 +43,7 @@ function PhoneList() {
               />
             </div>
             <Card.Body>
-              <Card.Title className="card-title">
-                {phone.modelname}
-              </Card.Title>
+              <Card.Title className="card-title">{phone.modelname}</Card.Title>
               <Card.Text className="card-text">
                 <strong>Year:</strong> {phone.year}
                 <br />
