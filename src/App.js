@@ -13,22 +13,22 @@ function App() {
       <nav style={navStyle}>
         <ul style={ulStyle}>
           <li style={liStyle}>
-            <Link to="/" style={linkStyle}>
+            <Link to="/" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               Home
             </Link>
           </li>
           <li style={liStyle}>
-            <Link to="/add-phone" style={linkStyle}>
+            <Link to="/add-phone" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               Add Phone
             </Link>
           </li>
           <li style={liStyle}>
-            <Link to="/search" style={linkStyle}>
+            <Link to="/search" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               Search
             </Link>
           </li>
           <li style={liStyle}>
-            <Link to="/search" style={linkStyle}>
+            <Link to="/search" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               Compare
             </Link>
           </li>
@@ -49,27 +49,41 @@ function App() {
 
 // Styles for the navigation bar
 const navStyle = {
-  background: "#007bff",
-  padding: "1rem",
-  color: "white",
+  backgroundColor: "#007bff",
+  padding: "1rem 2rem",
+  color: "#ffffff",
+  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 };
 
 const ulStyle = {
   listStyle: "none",
-  display: "flex",
-  justifyContent: "space-around",
+  display: "grid", // Change to grid layout
+  gridTemplateColumns: "repeat(4, 1fr)", // Four equally spaced columns
+  alignItems: "center", // Center items vertically
   margin: 0,
   padding: 0,
 };
 
 const liStyle = {
-  margin: "0 1rem",
+  display: "flex",
+  justifyContent: "center", // Center text horizontally
 };
 
 const linkStyle = {
   textDecoration: "none",
-  color: "white",
-  fontWeight: "bold",
+  color: "#ffffff",
+  fontWeight: 600,
+  fontSize: "1rem",
+  transition: "color 0.3s ease",
+  cursor: "pointer",
+};
+
+const handleMouseEnter = (e) => {
+  e.target.style.color = "#add8e6"; // Change color on hover
+};
+
+const handleMouseLeave = (e) => {
+  e.target.style.color = "#ffffff"; // Reset color on mouse leave
 };
 
 export default App;
