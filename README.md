@@ -105,6 +105,6 @@ phone-catalog/
 - **Mehul Srivastava**
 - **Siddhant Jain**
 - **Neel Madhav Dogra**
-- **Anand**
+- **Anand Krishna Mishra**
 
 ---
