@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import api from '../services/api';
-import { Link } from 'react-router-dom';
-import { Card, Container, Row, Col, Spinner, Button } from 'react-bootstrap';
-import './PhoneList.css'; // Custom CSS file
+import React, { useEffect, useState } from "react";
+import api from "../services/api";
+import { Link } from "react-router-dom";
+import { Card, Container, Row, Col, Spinner, Button } from "react-bootstrap";
+import "./PhoneList.css"; // Custom CSS file
 
 function PhoneList() {
   const [phones, setPhones] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/phones')
+    api
+      .get("/phones")
       .then((response) => {
         setPhones(response.data);
         setLoading(false);
       })
-      .catch((error) => console.error('Error fetching phones:', error));
+      .catch((error) => console.error("Error fetching phones:", error));
   }, []);
 
   if (loading) {
@@ -31,7 +32,14 @@ function PhoneList() {
       <h1 className="text-center mb-4 title">📱 Phone Catalog</h1>
       <Row className="justify-content-center">
         {phones.map((phone) => (
-          <Col key={phone.modelid} xs={12} sm={6} md={4} lg={3} className="mb-4">
+          <Col
+            key={phone.modelid}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            className="mb-4"
+          >
             <Card className="phone-card shadow">
               <div className="card-header">
                 <Card.Img
@@ -42,7 +50,9 @@ function PhoneList() {
                 />
               </div>
               <Card.Body>
-                <Card.Title className="card-title">{phone.modelname}</Card.Title>
+                <Card.Title className="card-title">
+                  {phone.modelname}
+                </Card.Title>
                 <Card.Text className="card-text">
                   <strong>Year:</strong> {phone.year}
                   <br />
