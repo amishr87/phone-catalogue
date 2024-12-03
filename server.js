@@ -36,7 +36,8 @@ const startServer = async () => {
     app.get("/phones/:id", async (req, res) => {
       try {
         const { id } = req.params;
-        const result = await db.query("SELECT * FROM phone WHERE modelid = $1",
+        const result = await db.query(
+          "SELECT * FROM phone WHERE modelid = $1",
           [id]
         );
         res.json(result.rows);
@@ -111,16 +112,16 @@ const startServer = async () => {
     app.get("/search-specifications", async (req, res) => {
       try {
         const { modelname } = req.query;
-    
+
         // Debugging: Log the incoming modelname
         console.log("Received request for modelname:", modelname);
-    
+
         // Validate input: Check if it's a non-empty string
         if (!modelname || modelname.trim() === "" || !isNaN(modelname)) {
           console.warn("Invalid or empty modelname provided");
           return res.status(400).json({ error: "Invalid or empty modelname" });
         }
-    
+
         // Fetch phone details and specifications using a JOIN
         const result = await db.query(
           `
@@ -134,13 +135,13 @@ const startServer = async () => {
           `,
           [modelname.trim()]
         );
-    
+
         // If no result is found, return a 404
         if (result.rows.length === 0) {
           console.warn("No details found for modelname:", modelname);
           return res.status(404).json({ error: "Phone details not found" });
         }
-    
+
         // Success response
         console.log(`Returning details for modelname: ${modelname}`);
         res.json({
@@ -151,8 +152,8 @@ const startServer = async () => {
         console.error("Error fetching phone details:", err.message);
         res.status(500).send("Server Error");
       }
-    });    
-    
+    });
+
     const PORT = process.env.PORT || 5001;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

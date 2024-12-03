@@ -84,19 +84,33 @@ function Search({ modelName }) {
           </div>
           <div className="details-grid">
             <div>
-              <p><strong>Screen Size:</strong> {phoneDetails.screensize} inches</p>
-              <p><strong>Battery Size:</strong> {phoneDetails.batterysize} mAh</p>
+              <p>
+                <strong>Screen Size:</strong> {phoneDetails.screensize} inches
+              </p>
+              <p>
+                <strong>Battery Size:</strong> {phoneDetails.batterysize} mAh
+              </p>
             </div>
             <div>
-              <p><strong>Processor:</strong> {phoneDetails.processor}</p>
-              <p><strong>RAM:</strong> {phoneDetails.ram} GB</p>
+              <p>
+                <strong>Processor:</strong> {phoneDetails.processor}
+              </p>
+              <p>
+                <strong>RAM:</strong> {phoneDetails.ram} GB
+              </p>
             </div>
             <div>
-              <p><strong>Storage:</strong> {phoneDetails.storage} GB</p>
-              <p><strong>Number of Cameras:</strong> {phoneDetails.noofcameras}</p>
+              <p>
+                <strong>Storage:</strong> {phoneDetails.storage} GB
+              </p>
+              <p>
+                <strong>Number of Cameras:</strong> {phoneDetails.noofcameras}
+              </p>
             </div>
             <div>
-              <p><strong>Camera Size:</strong> {phoneDetails.camerasize} MP</p>
+              <p>
+                <strong>Camera Size:</strong> {phoneDetails.camerasize} MP
+              </p>
             </div>
           </div>
         </Card.Body>

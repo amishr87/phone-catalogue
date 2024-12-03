@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Card, Spinner } from 'react-bootstrap';
-import api from '../services/api';
-import './PhoneDetails.css';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Container, Card, Spinner } from "react-bootstrap";
+import api from "../services/api";
+import "./PhoneDetails.css";
 
 function PhoneDetails() {
   const { id } = useParams(); // Get the phone ID from the URL
   const [phone, setPhone] = useState(null);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchPhoneDetails = async () => {
-    try {
-      const [specifications, generalDetails] = await Promise.all([
-        api.get(`/specifications/${id}`),
-        api.get(`/phones/${id}`), // Fetch phone details (including image URL)
-      ]);
-      // Extract the first objects from the response arrays
-      const specificationsData = specifications.data[0];
-      const generalDetailsData = generalDetails.data[0];
+  useEffect(() => {
+    const fetchPhoneDetails = async () => {
+      try {
+        const [specifications, generalDetails] = await Promise.all([
+          api.get(`/specifications/${id}`),
+          api.get(`/phones/${id}`), // Fetch phone details (including image URL)
+        ]);
+        // Extract the first objects from the response arrays
+        const specificationsData = specifications.data[0];
+        const generalDetailsData = generalDetails.data[0];
 
-      // Merge the data into the phone object
-      setPhone({
-        ...specificationsData,
-        ...generalDetailsData, // Merge general details, including image
-      });
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching phone details:', error);
-    }
-  };
+        // Merge the data into the phone object
+        setPhone({
+          ...specificationsData,
+          ...generalDetailsData, // Merge general details, including image
+        });
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching phone details:", error);
+      }
+    };
 
-  fetchPhoneDetails();
-}, [id]);
+    fetchPhoneDetails();
+  }, [id]);
 
   if (loading) {
     return (
@@ -59,29 +59,39 @@ useEffect(() => {
         </Card.Header>
         <Card.Body>
           <div className="text-center mb-4">
-            <img
-                src={`/${phone.image}`}
-                className="details-img"
-            />
+            <img src={`/${phone.image}`} className="details-img" />
           </div>
           <div className="details-grid">
-          <div>
-            <p><strong>Screen Size:</strong> {phone.screensize} inches</p>
-            <p><strong>Battery Size:</strong> {phone.batterysize} mAh</p>
+            <div>
+              <p>
+                <strong>Screen Size:</strong> {phone.screensize} inches
+              </p>
+              <p>
+                <strong>Battery Size:</strong> {phone.batterysize} mAh
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Processor:</strong> {phone.processor}
+              </p>
+              <p>
+                <strong>RAM:</strong> {phone.ram} GB
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Storage:</strong> {phone.storage} GB
+              </p>
+              <p>
+                <strong>Number of Cameras:</strong> {phone.noofcameras}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Camera Size:</strong> {phone.camerasize} MP
+              </p>
+            </div>
           </div>
-          <div>
-            <p><strong>Processor:</strong> {phone.processor}</p>
-            <p><strong>RAM:</strong> {phone.ram} GB</p>
-          </div>
-          <div>
-            <p><strong>Storage:</strong> {phone.storage} GB</p>
-            <p><strong>Number of Cameras:</strong> {phone.noofcameras}</p>
-          </div>
-          <div>
-            <p><strong>Camera Size:</strong> {phone.camerasize} MP</p>
-          </div>
-        </div>
-
         </Card.Body>
       </Card>
     </Container>
