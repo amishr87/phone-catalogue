@@ -1,0 +1,19 @@
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.submit-button {
+  margin-left: 10px;
+}
+
+.phone-input {
+  padding: 10px;
+  border: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 5px;
+  width: 550px;
+}
