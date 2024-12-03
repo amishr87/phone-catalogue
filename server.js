@@ -115,53 +115,43 @@ const startServer = async () => {
         // Debugging: Log the incoming modelname
         console.log("Received request for modelname:", modelname);
     
-        // Validate input: Check if it's a non-empty string (not an ID or empty input)
+        // Validate input: Check if it's a non-empty string
         if (!modelname || modelname.trim() === "" || !isNaN(modelname)) {
           console.warn("Invalid or empty modelname provided");
           return res.status(400).json({ error: "Invalid or empty modelname" });
         }
     
-        // Fetch the phone ID from the phone table
-        const phoneResult = await db.query(
-          "SELECT modelid FROM phone WHERE modelname = $1",
+        // Fetch phone details and specifications using a JOIN
+        const result = await db.query(
+          `
+          SELECT 
+            p.modelid, p.modelname, p.image, p.startingprice, p.year,
+            s.screensize, s.batterysize, s.processor, s.ram, 
+            s.storage, s.noofcameras, s.camerasize
+          FROM phone p
+          JOIN specifications s ON p.modelid = s.modelid
+          WHERE p.modelname = $1
+          `,
           [modelname.trim()]
         );
     
-        if (phoneResult.rows.length === 0) {
-          console.warn("Phone not found for modelname:", modelname);
-          return res.status(404).json({ error: "Phone not found" });
-        }
-    
-        const phoneId = phoneResult.rows[0].modelid;
-    
-        // Fetch specifications using the phone ID
-        const specResult = await db.query(
-          "SELECT * FROM specifications WHERE modelid = $1",
-          [phoneId]
-        );
-    
-        if (specResult.rows.length === 0) {
-          console.warn(
-            `Specifications not found for phone ID ${phoneId}, modelname: ${modelname}`
-          );
-          return res.status(404).json({ error: "Specifications not found" });
+        // If no result is found, return a 404
+        if (result.rows.length === 0) {
+          console.warn("No details found for modelname:", modelname);
+          return res.status(404).json({ error: "Phone details not found" });
         }
     
         // Success response
-        console.log(
-          `Returning specifications for phone ID ${phoneId}, modelname: ${modelname}`
-        );
+        console.log(`Returning details for modelname: ${modelname}`);
         res.json({
-          phoneId,
-          specifications: specResult.rows,
+          phoneDetails: result.rows[0], // Return the combined details
         });
       } catch (err) {
         // Debugging: Log the error message
-        console.error("Error fetching specifications:", err.message);
+        console.error("Error fetching phone details:", err.message);
         res.status(500).send("Server Error");
       }
-    });
-      
+    });    
     
     const PORT = process.env.PORT || 5001;
     app.listen(PORT, () => {

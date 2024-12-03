@@ -4,42 +4,31 @@ import { Container, Card, Spinner } from "react-bootstrap";
 import "./PhoneDetails.css";
 
 function Search({ modelName }) {
-  const [result, setResult] = useState(null);
+  const [phoneDetails, setPhoneDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // Handle component unmounts safely
+    let isMounted = true;
 
     if (modelName) {
       setLoading(true);
-      setError(null); // Reset error state
-      setResult(null); // Reset result state
+      setError(null);
 
       const apiUrl = `/search-specifications?modelname=${encodeURIComponent(
         modelName
       )}`;
 
-      // Set a timeout for fallback
-      const timeout = setTimeout(() => {
-        if (isMounted && loading) {
-          setError("Request timed out. Please try again.");
-          setLoading(false);
-        }
-      }, 10000); // 10 seconds
-
       api
         .get(apiUrl)
         .then((response) => {
           if (isMounted) {
-            clearTimeout(timeout); // Clear timeout on success
-            setResult(response.data);
+            setPhoneDetails(response.data.phoneDetails);
             setLoading(false);
           }
         })
         .catch((err) => {
           if (isMounted) {
-            clearTimeout(timeout); // Clear timeout on error
             setError(err.response?.data?.error || "An error occurred");
             setLoading(false);
           }
@@ -47,7 +36,6 @@ function Search({ modelName }) {
 
       return () => {
         isMounted = false;
-        clearTimeout(timeout); // Clear timeout on unmount
       };
     } else {
       setError("Please provide a valid phone name.");
@@ -72,7 +60,7 @@ function Search({ modelName }) {
     );
   }
 
-  if (!result || !result.specifications || result.specifications.length === 0) {
+  if (!phoneDetails) {
     return (
       <Container className="my-5">
         <h1 className="text-center">No details found for this phone.</h1>
@@ -80,40 +68,36 @@ function Search({ modelName }) {
     );
   }
 
-  const phone = result.specifications[0];
-
   return (
     <Container className="my-5">
       <Card className="phone-details-card shadow">
         <Card.Header className="text-center card-header">
-          <h1>{modelName}</h1>
+          <h1>{phoneDetails.modelname}</h1>
         </Card.Header>
         <Card.Body>
           <div className="text-center mb-4">
-            <img src={phone.image} alt={modelName} className="details-img" />
+            <img
+              src={`/${phoneDetails.image}`}
+              className="details-img"
+              alt={phoneDetails.modelname}
+            />
           </div>
           <div className="details-grid">
-            <p>
-              <strong>Screen Size:</strong> {phone.screensize} inches
-            </p>
-            <p>
-              <strong>Battery Size:</strong> {phone.batterysize} mAh
-            </p>
-            <p>
-              <strong>Processor:</strong> {phone.processor}
-            </p>
-            <p>
-              <strong>RAM:</strong> {phone.ram} GB
-            </p>
-            <p>
-              <strong>Storage:</strong> {phone.storage} GB
-            </p>
-            <p>
-              <strong>Number of Cameras:</strong> {phone.noofcameras}
-            </p>
-            <p>
-              <strong>Camera Size:</strong> {phone.camerasize} MP
-            </p>
+            <div>
+              <p><strong>Screen Size:</strong> {phoneDetails.screensize} inches</p>
+              <p><strong>Battery Size:</strong> {phoneDetails.batterysize} mAh</p>
+            </div>
+            <div>
+              <p><strong>Processor:</strong> {phoneDetails.processor}</p>
+              <p><strong>RAM:</strong> {phoneDetails.ram} GB</p>
+            </div>
+            <div>
+              <p><strong>Storage:</strong> {phoneDetails.storage} GB</p>
+              <p><strong>Number of Cameras:</strong> {phoneDetails.noofcameras}</p>
+            </div>
+            <div>
+              <p><strong>Camera Size:</strong> {phoneDetails.camerasize} MP</p>
+            </div>
           </div>
         </Card.Body>
       </Card>
