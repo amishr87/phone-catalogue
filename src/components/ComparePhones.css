@@ -1,0 +1,13 @@
+.main-div {
+  display: flex;
+  width: 100%;
+}
+
+.child-1,
+.child-2 {
+  flex: 1;
+  /* width: 500px; */
+  padding: 20px;
+  border: 1px solid #000;
+  text-align: center;
+}
