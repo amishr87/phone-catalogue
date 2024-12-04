@@ -108,3 +108,17 @@ phone-catalog/
 - **Anand Krishna Mishra**
 
 ---
+
+## Pages
+
+### Phone Catalogue 
+<img width="1495" alt="Screenshot 2024-12-04 at 3 58 31 AM" src="https://github.com/user-attachments/assets/88ae12dc-077b-49c9-918d-4add85f0a69d">
+
+### Search Phone
+<img width="1496" alt="Screenshot 2024-12-04 at 3 59 39 AM" src="https://github.com/user-attachments/assets/9f0229ea-7896-4ee7-9ffc-e378ae029b8a">
+
+### Compare Phones
+<img width="1496" alt="Screenshot 2024-12-04 at 4 00 48 AM" src="https://github.com/user-attachments/assets/cb20f89d-28fe-4a0b-9700-178033f24a33">
+
+### Add Phone
+<img width="1496" alt="Screenshot 2024-12-04 at 3 59 07 AM" src="https://github.com/user-attachments/assets/4449f04a-0b7d-4b55-b320-278cdf0e2a5e">
