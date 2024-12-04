@@ -34,7 +34,7 @@ A responsive web application to browse and view detailed specifications of vario
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/msrivas-7/phone-catalog.git
+git clone git@github.com:msrivas-7/phone-catalogue.git
 cd phone-catalog
 ```
 
