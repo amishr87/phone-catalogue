@@ -5,6 +5,7 @@ import AddPhone from "./components/AddPhone";
 import PhoneDetails from "./components/PhoneDetails";
 import Search from "./components/Search";
 import SearchPage from "./components/SearchPage";
+import Compare from "./components/ComparePhones";
 
 function App() {
   return (
@@ -13,22 +14,42 @@ function App() {
       <nav style={navStyle}>
         <ul style={ulStyle}>
           <li style={liStyle}>
-            <Link to="/" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <Link
+              to="/"
+              style={linkStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               Home
             </Link>
           </li>
           <li style={liStyle}>
-            <Link to="/add-phone" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <Link
+              to="/add-phone"
+              style={linkStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               Add Phone
             </Link>
           </li>
           <li style={liStyle}>
-            <Link to="/search" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <Link
+              to="/search"
+              style={linkStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               Search
             </Link>
           </li>
           <li style={liStyle}>
-            <Link to="/search" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <Link
+              to="/compare"
+              style={linkStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               Compare
             </Link>
           </li>
@@ -42,6 +63,7 @@ function App() {
         <Route path="/phones/:id" element={<PhoneDetails />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search/:id" element={<Search />} />
+        <Route path="/compare" element={<Compare />} />
       </Routes>
     </div>
   );
